@@ -345,11 +345,9 @@ class CreateQuestViewController: UIViewController, ColorPickerDelegate, UITextFi
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == prizeAmountETHTextField {
             if prizeAmountETHTextField.text != "0.0" {
-                let ethValue = Double(prizeAmountETHTextField.text ?? "0.0")
-                let weiValue = EthUtils.convertEthToWei(eth: ethValue!)
-                let usdValue = EthUtils.convertWeiToUSD(wei: weiValue)
-                
-                prizeAmountUSDTextField.text = "\(usdValue)"
+                if let ethValue = Double(prizeAmountETHTextField.text ?? "0.0") {
+                    prizeAmountUSDTextField.text = "\(EthUtils.convertEthAmountToUSD(ethAmount: ethValue))"
+                }
             }else{
                 prizeAmountUSDTextField.text = "0.0"
             }
